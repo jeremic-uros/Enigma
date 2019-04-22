@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+
+    >
+    <TextView
+        android:id="@+id/pairedDevicesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pairedDevicesScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/PairedDevices"
+        android:textAlignment="center"
+        />
+    <ScrollView
+        android:id="@+id/pairedDevicesScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pairedDevicesTextView"
+        app:layout_constraintBottom_toTopOf="@id/otherDevicesTextView">
+
+        <LinearLayout
+            android:id="@+id/pairedDevices"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/otherDevicesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pairedDevicesScrollView"
+        app:layout_constraintBottom_toTopOf="@id/otherDevicesScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/otherDevices"
+        android:textAlignment="center"
+        />
+    <ScrollView
+        android:id="@+id/otherDevicesScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/otherDevicesTextView"
+        app:layout_constraintBottom_toTopOf="@id/searchDevicesButton">
+
+        <LinearLayout
+            android:id="@+id/otherDevices"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/searchDevicesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/otherDevicesScrollView"
+        android:text="@string/searchButton"/>
+</android.support.constraint.ConstraintLayout>

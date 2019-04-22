@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Enigma</string>
+    <string name="createGameButton">Napravi igru</string>
+    <string name="joinGameButton">Pridruži se igri</string>
+    <string name="ContinueButton">Nastavi</string>
+    <string name="RulesButton">Pravila</string>
+    <string name="enigma">ENIGMA</string>
+    <string name="startGame">Kreni</string>
+    <string name="newArrangment">Novi raspored</string>
+    <string name="newWords">Nove reči</string>
+    <string name="sendCodeButton">Pošalji</string>
+    <string name="inputCodeHint">šifra</string>
+    <string name="inputNumHint">broj</string>
+    <string name="otherDevices">Ostali uredjaji</string>
+    <string name="searchButton">Pretraga</string>
+    <string name="stopSearchButton">Prekini</string>
+    <string name="PairedDevices">Upareni uredjaji</string>
+    <string name="blueTeam">Plavi tim</string>
+    <string name="redTeam">Crveni tim</string>
+    <string name="connectButton">Povezi</string>
+    <string name="code">kod</string>
+    <string name="number">broj</string>
+</resources>
