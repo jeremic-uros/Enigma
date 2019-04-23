@@ -91,6 +91,12 @@ public class BluetoothHandler {
     }
     //Called by acceptThread
     private void manageConnection(final BluetoothSocket bluetoothSocket){
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context,"Povezani ste preko bluetootha",Toast.LENGTH_LONG).show();
+                }
+            });
 
             new Thread() {
                 public void run() {

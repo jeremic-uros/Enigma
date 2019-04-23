@@ -31,7 +31,14 @@ public class MasterActivity extends GameActivity implements CreateGameFragment.O
         clickable = true;
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(toReconnect){
+            onStartGamePressed();
+            toReconnect = false;
+        }
+    }
 
     //////////////////////////////////////////////
     /*
@@ -100,10 +107,15 @@ public class MasterActivity extends GameActivity implements CreateGameFragment.O
 
     @Override
     public void reconnect() {
+        toReconnect = true;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                onStartGamePressed(); // bluetooth is probably on if reconnecting
+                // if app visible start now else start in onResume
+                if(visibility) {
+                    onStartGamePressed(); // bluetooth is probably on if reconnecting
+                    toReconnect = false;
+                }
             }
         });
     }

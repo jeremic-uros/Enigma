@@ -17,6 +17,8 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
     protected ApplicationController gameController;
     protected BluetoothHandler bluetoothHandler;
     private GameModel.Turn turn;
+    protected boolean visibility;
+    protected boolean toReconnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,18 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
             teamName.setBackgroundColor(getResources().getColor(R.color.colorBlueTeam));
             gameController = new GameController(this);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        visibility = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        visibility = false;
     }
 
     @Override

@@ -35,7 +35,15 @@ public class AgentActivity extends GameActivity implements CardFragment.OnCardFr
         bluetoothHandler.turnBluetoothOn();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(toReconnect) {
+            Toast.makeText(getApplication(), "Povezite se ponovo", Toast.LENGTH_SHORT).show();
+            showPairedDevicesDialog();
+            toReconnect = false;
+        }
+    }
 
     @Override
     protected void onStart() {
@@ -148,11 +156,15 @@ public class AgentActivity extends GameActivity implements CardFragment.OnCardFr
 
     @Override
     public void reconnect() {
+        toReconnect = true;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplication(),"Povezite se ponovo",Toast.LENGTH_SHORT).show();
-                showPairedDevicesDialog();
+                if(visibility) {
+                    Toast.makeText(getApplication(), "Povezite se ponovo", Toast.LENGTH_SHORT).show();
+                    showPairedDevicesDialog();
+                    toReconnect = false;
+                }
             }
         });
     }
