@@ -57,7 +57,6 @@ public class BluetoothHandler {
 
     public boolean startDiscovery() {
         if(!bluetoothAdapter.isDiscovering()) {
-            Toast.makeText(context,"Discovery started",Toast.LENGTH_SHORT).show();
             return bluetoothAdapter.startDiscovery();
         }
         return false;
@@ -70,7 +69,7 @@ public class BluetoothHandler {
 
     public void startBluetoothServer() {
         if( serverRunning) {
-            Toast.makeText(context,"SERVER ALREADY RUNNING", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Ćeka se drugi uredjaj", Toast.LENGTH_SHORT).show();
         }
         else {
             bluetoothServer = new AcceptThread();
@@ -126,7 +125,7 @@ public class BluetoothHandler {
         }
 
         public void run() {
-            BluetoothSocket socket = null;
+            BluetoothSocket socket;
             // Keep listening until exception occurs or a socket is returned.
             while (true) {
                 try {
