@@ -18,22 +18,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void createGame(View view) {
+    public void onCreateGame(View view) {
         Intent startMasterActivity = new Intent(this, MasterActivity.class);
          startActivity(startMasterActivity);
     }
 
 
-    public void joinGame(View view) {
+    public void onJoinGame(View view) {
         Intent startAgentActivity = new Intent(this, AgentActivity.class);
         startActivity(startAgentActivity);
     }
 
 
-    public void continueGame(View view) {
+    public void onContinueGame(View view) {
+
 
     }
-    public void rules(View view) {
+    public void onRules(View view) {
 
     }
 

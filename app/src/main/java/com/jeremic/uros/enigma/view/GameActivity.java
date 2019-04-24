@@ -1,5 +1,7 @@
 package com.jeremic.uros.enigma.view;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -146,5 +148,13 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
     @Override
     public void setCode(String code, String num) {
 
+    }
+
+    @Override
+    public void setGameStart(boolean gameStartedFlag ) {
+        SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = flags.edit();
+        editor.putBoolean("gameStarted",gameStartedFlag);
+        editor.apply();
     }
 }

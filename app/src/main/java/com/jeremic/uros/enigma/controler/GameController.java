@@ -106,6 +106,9 @@ public class GameController implements ApplicationController {
                 Log.i("AGENT", "refreshed words");
             }
 
+            // save flag that the game has started
+            gameView.setGameStart(true);
+
             /*
                 Wait for the code and numbber of words associate with the code
                 Enable cards to be clicked
@@ -121,6 +124,7 @@ public class GameController implements ApplicationController {
         }
         gameover();
     }
+
 
     private void receiveWordsAndLayoutPhase(String[] words, GameModel.CardType[] layout) {
         try {
@@ -224,6 +228,9 @@ public class GameController implements ApplicationController {
                 Log.i("MASTER", "sent words");
             }
 
+            // save flag that the game has started
+            gameView.setGameStart(true);
+
             gameStarted = true;
             waitForCardPressPhase();
 
@@ -326,6 +333,7 @@ public class GameController implements ApplicationController {
     }
 
     private void gameover(){
+            gameView.setGameStart(false);
             Log.i("GAMEOVER","YAAAS");
             // Close all used resources
             close();
