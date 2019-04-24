@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +37,25 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
     }
 
     @Override
+    protected void onStart() {
+        SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(this);
+        if(flags.getBoolean("gameStarted",false)) {
+            gameController.restoreGameModel();
+        }
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         visibility = true;
+    }
+
+    @Override
+    protected void onStop() {
+        gameController.saveGameModel();
+        Log.i("UROS","saved game model");
+        super.onStop();
     }
 
     @Override

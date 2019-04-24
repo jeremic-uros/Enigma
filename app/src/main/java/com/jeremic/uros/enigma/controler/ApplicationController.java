@@ -18,4 +18,6 @@ public interface ApplicationController extends Serializable {
     void sendCode(String code,String num);
     void close();
     void setGameView(GameView activity);
+    void saveGameModel();
+    void restoreGameModel();
 }

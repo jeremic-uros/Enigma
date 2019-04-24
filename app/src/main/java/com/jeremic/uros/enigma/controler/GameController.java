@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Layout;
 import android.util.Log;
+import android.view.View;
 
 import com.jeremic.uros.enigma.view.GameView;
 import com.jeremic.uros.enigma.R;
@@ -33,7 +34,7 @@ public class GameController implements ApplicationController {
     private boolean gameStarted;
 
     public GameController(Activity context){
-        gameModel = new GameModel();
+        gameModel = new GameModel(context);
         if ( context instanceof GameView){
             gameView = (GameView) context;
         }
@@ -330,6 +331,32 @@ public class GameController implements ApplicationController {
     @Override
     public void setGameView(GameView activity) {
         if(gameView == null) gameView = activity;
+    }
+
+    @Override
+    public void saveGameModel() {
+        gameModel.saveGameModel();
+    }
+
+    @Override
+    public void restoreGameModel(){
+        gameModel = gameModel.restoreGameModel();
+        if(gameModel != null){
+            gameModel.setContext((Context) gameView);
+            gameView.refreshCards(gameModel.getWords());
+            gameView.refreshTurnDisplay(gameModel.getTurn());
+            boolean[] pressed = gameModel.getIsPressed();
+            for (int i= 0 ; i < 25 ; i++){
+                if(pressed[i]){
+                    gameView.refreshOnCardClick(i);
+                }
+            }
+
+        }
+        else {
+            gameModel = new GameModel((Context) gameView);
+        }
+
     }
 
     private void gameover(){
