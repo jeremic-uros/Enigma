@@ -11,11 +11,12 @@ import android.widget.Toast;
 
 import com.jeremic.uros.enigma.R;
 import com.jeremic.uros.enigma.bluetooth.BluetoothHandler;
+import com.jeremic.uros.enigma.cards.CardFragment;
 import com.jeremic.uros.enigma.controler.ApplicationController;
 import com.jeremic.uros.enigma.controler.GameController;
 import com.jeremic.uros.enigma.model.GameModel;
 
-public abstract class GameActivity extends AppCompatActivity implements GameView {
+public abstract class GameActivity extends AppCompatActivity implements GameView, CardFragment.OnCardFragmentInteractionListener {
     protected boolean clickable;
     protected ApplicationController gameController;
     protected BluetoothHandler bluetoothHandler;
@@ -38,10 +39,6 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
 
     @Override
     protected void onStart() {
-        SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(this);
-        if(flags.getBoolean("gameStarted",false)) {
-            gameController.restoreGameModel();
-        }
         super.onStart();
     }
 
@@ -173,5 +170,10 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
         SharedPreferences.Editor editor = flags.edit();
         editor.putBoolean("gameStarted",gameStartedFlag);
         editor.apply();
+    }
+
+    @Override
+    public GameModel restoreGameModel(){
+        return gameController.restoreGameModel();
     }
 }

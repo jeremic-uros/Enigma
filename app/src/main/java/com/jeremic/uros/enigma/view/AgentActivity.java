@@ -24,7 +24,7 @@ import com.jeremic.uros.enigma.cards.CardFragment;
 import com.jeremic.uros.enigma.controler.ApplicationController;
 import com.jeremic.uros.enigma.controler.GameController;
 
-public class AgentActivity extends GameActivity implements CardFragment.OnCardFragmentInteractionListener,BluetoothHandler.BluetoothCommunication, GameView, CodeFragment.OnCodeInteractionListener {
+public class AgentActivity extends GameActivity implements BluetoothHandler.BluetoothCommunication, GameView, CodeFragment.OnCodeInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,5 +19,5 @@ public interface ApplicationController extends Serializable {
     void close();
     void setGameView(GameView activity);
     void saveGameModel();
-    void restoreGameModel();
+    GameModel restoreGameModel();
 }

@@ -1,6 +1,8 @@
 package com.jeremic.uros.enigma.view;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,7 +19,7 @@ import com.jeremic.uros.enigma.controler.ApplicationController;
 import com.jeremic.uros.enigma.controler.GameController;
 import com.jeremic.uros.enigma.model.GameModel;
 
-public class MasterActivity extends GameActivity implements CreateGameFragment.OnCreateGameFragmentInteractionListener, CardFragment.OnCardFragmentInteractionListener, GameControlsFragment.OnGameControlsInteractionListener, GameView,
+public class MasterActivity extends GameActivity implements CreateGameFragment.OnCreateGameFragmentInteractionListener, GameControlsFragment.OnGameControlsInteractionListener, GameView,
         BluetoothHandler.BluetoothCommunication {
 
 
@@ -27,6 +29,10 @@ public class MasterActivity extends GameActivity implements CreateGameFragment.O
         if(savedInstanceState == null) {
             Fragment creatFrag = CreateGameFragment.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.controlsFragment, creatFrag).commit();
+            SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(this);
+            if(flags.getBoolean("gameStarted",false)){
+                // TO:DO Disable new words and new layout buttons
+            }
         }
         clickable = true;
     }

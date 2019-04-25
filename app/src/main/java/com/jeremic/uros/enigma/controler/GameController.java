@@ -339,24 +339,17 @@ public class GameController implements ApplicationController {
     }
 
     @Override
-    public void restoreGameModel(){
+    public GameModel restoreGameModel(){
         gameModel = gameModel.restoreGameModel();
         if(gameModel != null){
             gameModel.setContext((Context) gameView);
-            gameView.refreshCards(gameModel.getWords());
-            gameView.refreshTurnDisplay(gameModel.getTurn());
-            boolean[] pressed = gameModel.getIsPressed();
-            for (int i= 0 ; i < 25 ; i++){
-                if(pressed[i]){
-                    gameView.refreshOnCardClick(i);
-                }
-            }
+            gameView.refreshTurnDisplay(gameModel.getTurn()); // TO:DO move from here
 
         }
         else {
             gameModel = new GameModel((Context) gameView);
         }
-
+        return gameModel;
     }
 
     private void gameover(){

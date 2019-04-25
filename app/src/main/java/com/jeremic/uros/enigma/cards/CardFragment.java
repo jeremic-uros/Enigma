@@ -1,7 +1,9 @@
 package com.jeremic.uros.enigma.cards;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jeremic.uros.enigma.model.GameModel;
 import com.jeremic.uros.enigma.view.AgentActivity;
 import com.jeremic.uros.enigma.R;
 import com.jeremic.uros.enigma.controler.ApplicationController;
+import com.jeremic.uros.enigma.view.MasterActivity;
 
 
 public class CardFragment extends Fragment {
@@ -57,7 +61,18 @@ public class CardFragment extends Fragment {
 
                 if(savedInstanceState == null) {
                     String[] words = new String[25];
-                    mAdapter = new CardAdapter(words, getResources(), view.getMeasuredHeight());
+
+                    SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    if(flags.getBoolean("gameStarted",false)){
+                        SharedPreferences.Editor editor = flags.edit();
+                        editor.putBoolean("gameStarted",false);
+                        editor.apply();
+                        boolean isMaster = false;
+                        if(mListener instanceof MasterActivity) isMaster = true;
+                        mAdapter = new CardAdapter(mListener.restoreGameModel(),getResources(),view.getMeasuredHeight(),isMaster);
+                    }
+                    else mAdapter = new CardAdapter(words, getResources(), view.getMeasuredHeight());
+
                 } else {
                     ((CardAdapter) mAdapter).setRootHeight(view.getMeasuredHeight());
                 }
@@ -120,6 +135,7 @@ public class CardFragment extends Fragment {
 
     public interface OnCardFragmentInteractionListener {
         void onCardPressed(int pos);
+        GameModel restoreGameModel();
     }
 
     //Update words

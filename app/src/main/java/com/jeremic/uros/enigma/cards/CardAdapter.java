@@ -31,6 +31,32 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
         for(int i = 0 ; i < 25 ; i++) layout[i] = R.color.colorNeutral;
     }
 
+    // Used when loading from file
+    public CardAdapter(GameModel gameModel,Resources res, int height,boolean isMaster){
+        this(gameModel.getWords(),res,height);
+        GameModel.CardType[] types = gameModel.getLayout();
+        boolean[] isPressed = gameModel.getIsPressed();
+        for(int i = 0 ; i < 25 ; i++){
+            if(isMaster || isPressed[i]) {
+                switch (types[i]) {
+                    case RED:
+                        layout[i] = R.color.colorRedTeam;
+                        break;
+                    case BLUE:
+                        layout[i] = R.color.colorBlueTeam;
+                        break;
+                    case BLANK:
+                        layout[i] = R.color.colorBlank;
+                        break;
+                    case ASSASSIN:
+                        layout[i] = R.color.colorAssassin;
+                        break;
+                }
+            }
+            if(isPressed[i]) words[i] = "";
+        }
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
