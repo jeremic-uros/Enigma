@@ -165,10 +165,11 @@ public abstract class GameActivity extends AppCompatActivity implements GameView
     }
 
     @Override
-    public void setGameStart(boolean gameStartedFlag ) {
+    public void setGameStartFlags(boolean gameStartedFlag,String gameTypeFlag ) {
         SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = flags.edit();
         editor.putBoolean("gameStarted",gameStartedFlag);
+        editor.putString("gameType",gameTypeFlag);
         editor.apply();
     }
 

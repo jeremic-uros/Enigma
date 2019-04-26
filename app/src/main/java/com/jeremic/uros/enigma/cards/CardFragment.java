@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,9 +62,10 @@ public class CardFragment extends Fragment {
 
                 if(savedInstanceState == null) {
                     String[] words = new String[25];
-
+                    Log.i("save_debug","no save state");
                     SharedPreferences flags = PreferenceManager.getDefaultSharedPreferences(getActivity());
                     if(flags.getBoolean("gameStarted",false)){
+                        Log.i("save_debug","flag set");
                         SharedPreferences.Editor editor = flags.edit();
                         editor.putBoolean("gameStarted",false);
                         editor.apply();
@@ -71,9 +73,13 @@ public class CardFragment extends Fragment {
                         if(mListener instanceof MasterActivity) isMaster = true;
                         mAdapter = new CardAdapter(mListener.restoreGameModel(),getResources(),view.getMeasuredHeight(),isMaster);
                     }
-                    else mAdapter = new CardAdapter(words, getResources(), view.getMeasuredHeight());
+                    else {
+                        mAdapter = new CardAdapter(words, getResources(), view.getMeasuredHeight());
+                        Log.i("save_debug","flag not set");
+                    }
 
                 } else {
+                    Log.i("save_debug","save state");
                     ((CardAdapter) mAdapter).setRootHeight(view.getMeasuredHeight());
                 }
 

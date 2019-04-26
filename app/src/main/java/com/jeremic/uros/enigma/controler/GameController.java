@@ -108,7 +108,7 @@ public class GameController implements ApplicationController {
             }
 
             // save flag that the game has started
-            gameView.setGameStart(true);
+            gameView.setGameStartFlags(true,"agent");
 
             /*
                 Wait for the code and numbber of words associate with the code
@@ -229,8 +229,8 @@ public class GameController implements ApplicationController {
                 Log.i("MASTER", "sent words");
             }
 
-            // save flag that the game has started
-            gameView.setGameStart(true);
+            // save flags that the game has started
+            gameView.setGameStartFlags(true,"master");
 
             gameStarted = true;
             waitForCardPressPhase();
@@ -318,9 +318,13 @@ public class GameController implements ApplicationController {
         // Close all used resources
         try {
             if(bf != null && pw != null) {
-                bf.close();
+                Log.i("socket_debug","closing pw");
                 pw.close();
+                Log.i("socket_debug","closing bf");
+                bf.close();
+                Log.i("socket_debug","closing socket");
                 bluetoothSocket.close();
+                Log.i("socket_debug","closed socket");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -341,6 +345,7 @@ public class GameController implements ApplicationController {
     @Override
     public GameModel restoreGameModel(){
         gameModel = gameModel.restoreGameModel();
+        this.gameStarted = true;
         if(gameModel != null){
             gameModel.setContext((Context) gameView);
             gameView.refreshTurnDisplay(gameModel.getTurn()); // TO:DO move from here
@@ -353,7 +358,6 @@ public class GameController implements ApplicationController {
     }
 
     private void gameover(){
-            gameView.setGameStart(false);
             Log.i("GAMEOVER","YAAAS");
             // Close all used resources
             close();
@@ -374,7 +378,9 @@ public class GameController implements ApplicationController {
             else {
                 gameView.showError("Bluetooth je prestao sa radom");
                 gameView.reconnect();
+                return;
             }
+            gameView.setGameStartFlags(false,"");
     }
 
     private GameModel.Turn changeTurn(){

@@ -12,5 +12,5 @@ public interface GameView {
     void showError(String errorMsg);
     void showWinner(String winner);
     void reconnect();
-    void setGameStart(boolean gameStartedFlag);
+    void setGameStartFlags(boolean gameStartedFlag,String gameTypeFlag);
 }
