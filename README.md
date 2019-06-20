@@ -1,6 +1,7 @@
 
 # Enigma
 
-Enigma is a school project.
-It is a bluetooth word guessing game played by two teams.
+Enigma is a bluetooth word guessing game played by two teams.
 Currently only serbian words are available.
+
+Game is in development with most of the game finished.
